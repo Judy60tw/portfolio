@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#0a192f',
+                        'light-navy': '#112240',
+                        'lightest-navy': '#233554',
+                        'slate': '#8892b0',
+                        'light-slate': '#a8b2d1',
+                        'lightest-slate': '#ccd6f6',
+                        'white': '#e6f1ff',
+                        'green': '#64ffda',
+                    },
+                    fontFamily: {
+                        'calibre': ['Calibre', 'Inter', 'San Francisco', 'SF Pro Text', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', 'Calibre', 'San Francisco', 'SF Pro Text', system-ui, sans-serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* 添加背景装饰 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(100, 255, 218, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(100, 255, 218, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        main {
+            position: relative;
+            z-index: 1;
+        }
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        /* 技能标签悬停效果 */
+        .skill-tag {
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(100, 255, 218, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-navy text-lightest-slate antialiased">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-navy/80 backdrop-blur-sm border-b border-lightest-navy/20">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <a href="#home" class="text-green font-semibold hover:text-green/80 transition-colors">生活</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="text-light-slate hover:text-green transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                </button>
+                <a href="#" class="text-light-slate hover:text-green transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="text-light-slate hover:text-green transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Left Sidebar -->
+                <aside class="lg:col-span-3 lg:sticky lg:top-24 lg:h-screen">
+                    <div class="space-y-8">
+                        <!-- Name & Title -->
+                        <div class="relative">
+                            <div class="absolute -left-4 top-0 w-1 h-16 bg-green opacity-50"></div>
+                            <h1 class="text-5xl font-bold text-white mb-4 relative">
+                                <span class="relative z-10">Judy</span>
+                                <span class="absolute -bottom-2 left-0 w-20 h-1 bg-green/30"></span>
+                            </h1>
+                            <p class="text-light-slate leading-relaxed relative z-10">
+                                致力於探索 Web 開發的新邊界，目前正以 Cursor 為起點，學習如何透過 AI 協作打造流暢的數位體驗。
+                            </p>
+                        </div>
+
+                        <!-- Navigation -->
+                        <nav class="space-y-2">
+                            <a href="#about" class="flex items-center group text-light-slate hover:text-green transition-colors">
+                                <span class="w-8 h-px bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-12 transition-all"></span>
+                                <span>關於</span>
+                            </a>
+                            <a href="#skills" class="flex items-center group text-light-slate hover:text-green transition-colors">
+                                <span class="w-8 h-px bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-12 transition-all"></span>
+                                <span>所需</span>
+                            </a>
+                            <a href="#experience" class="flex items-center group text-light-slate hover:text-green transition-colors">
+                                <span class="w-8 h-px bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-12 transition-all"></span>
+                                <span>經驗</span>
+                            </a>
+                            <a href="#contact" class="flex items-center group text-light-slate hover:text-green transition-colors">
+                                <span class="w-8 h-px bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-12 transition-all"></span>
+                                <span>聯絡</span>
+                            </a>
+                        </nav>
+
+                        <!-- Social Links -->
+                        <div class="flex items-center space-x-4 pt-8">
+                            <a href="#" class="text-light-slate hover:text-green transition-colors" aria-label="GitHub">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-light-slate hover:text-green transition-colors" aria-label="LinkedIn">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-light-slate hover:text-green transition-colors" aria-label="Instagram">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-light-slate hover:text-green transition-colors" aria-label="Email">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Right Content Area -->
+                <div class="lg:col-span-9 space-y-24">
+                    <!-- About Section -->
+                    <section id="about" class="scroll-mt-24 fade-in-up">
+                        <div class="flex items-center mb-8">
+                            <h2 class="text-3xl font-bold text-white flex items-center">
+                                <span class="text-green text-xl mr-4 font-mono">01.</span>
+                                關於我
+                            </h2>
+                            <div class="flex-1 h-px bg-lightest-navy/30 ml-6"></div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="space-y-4 text-light-slate leading-relaxed">
+                                <p>
+                                    我是一名致力於探索 Web 開發新邊界的學習者。目前正以 Cursor 為起點，深入研究如何透過 AI 協作來打造流暢且直覺的數位體驗。我享受在程式碼與人工智慧之間尋找平衡，並將這些新技術轉化為實際的作品。
+                                </p>
+                                <p>
+                                    目前我專注於網頁前端的基礎建設，練習如何將設計概念精準地實現在瀏覽器中。對我而言，學習開發不只是為了寫出代碼，更是為了理解數位世界運行的邏輯。
+                                </p>
+                                <p>
+                                    在螢幕之外，我熱衷於探索大自然與生活的風味。我的興趣包括：
+                                </p>
+                                <ul class="list-none space-y-2 ml-4">
+                                    <li class="flex items-start">
+                                        <span class="text-green mr-3">•</span>
+                                        <span><strong class="text-white">戶外探索：</strong>熱愛健走與登山，享受登上山頂時那份開闊的視野。</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green mr-3">•</span>
+                                        <span><strong class="text-white">咖啡生活：</strong>深度著迷於咖啡文化，喜歡品嚐各地的豆子，並不斷嘗試手沖咖啡的各種參數，追求那杯最完美的風味。</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Hiking Image -->
+                            <div class="mt-8">
+                                <div class="relative rounded-lg overflow-hidden border border-lightest-navy/20 hover:border-green/50 transition-all duration-300 group">
+                                    <img 
+                                        src="images/hiking.jpg" 
+                                        alt="登山健行 - 在山徑上探索大自然" 
+                                        class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                                        loading="lazy"
+                                    >
+                                    <div class="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                </div>
+                                <p class="text-sm text-slate mt-3 text-center italic">
+                                    在山徑上探索，尋找數位世界之外的靈感
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Skills Section -->
+                    <section id="skills" class="scroll-mt-24 fade-in-up">
+                        <div class="flex items-center mb-8">
+                            <h2 class="text-3xl font-bold text-white flex items-center">
+                                <span class="text-green text-xl mr-4 font-mono">02.</span>
+                                所需
+                            </h2>
+                            <div class="flex-1 h-px bg-lightest-navy/30 ml-6"></div>
+                        </div>
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                    </svg>
+                                    前端技術
+                                </h3>
+                                <div class="flex flex-wrap gap-3">
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">HTML5</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">CSS3</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">JavaScript</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">TypeScript</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">React</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Tailwind CSS</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Responsive Design</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                    </svg>
+                                    開發工具
+                                </h3>
+                                <div class="flex flex-wrap gap-3">
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Git</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Cursor</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">VS Code</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">AI 協作</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Webpack</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                    </svg>
+                                    設計與協作
+                                </h3>
+                                <div class="flex flex-wrap gap-3">
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">UI/UX 設計</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Figma</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">團隊協作</span>
+                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">問題解決</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Experience Section -->
+                    <section id="experience" class="scroll-mt-24 fade-in-up">
+                        <div class="flex items-center mb-8">
+                            <h2 class="text-3xl font-bold text-white flex items-center">
+                                <span class="text-green text-xl mr-4 font-mono">03.</span>
+                                工作經驗
+                            </h2>
+                            <div class="flex-1 h-px bg-lightest-navy/30 ml-6"></div>
+                        </div>
+                        <div class="space-y-8">
+                            <div class="relative pl-8 border-l-2 border-lightest-navy">
+                                <div class="absolute -left-2.5 w-5 h-5 bg-green rounded-full border-2 border-navy"></div>
+                                <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 hover:border-green/50 transition-all duration-300">
+                                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                        <div>
+                                            <h3 class="text-xl font-semibold text-white mb-1">RD助理</h3>
+                                            <p class="text-green text-sm font-medium">Flat Display Technology Corporation</p>
+                                            <p class="text-light-slate text-sm">豐裕科技股份有限公司</p>
+                                        </div>
+                                        <span class="text-slate text-sm mt-2 md:mt-0">2024 - 至今</span>
+                                    </div>
+                                    <p class="text-light-slate text-sm leading-relaxed">
+                                        學習 Web 開發技術
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="relative pl-8 border-l-2 border-lightest-navy">
+                                <div class="absolute -left-2.5 w-5 h-5 bg-green rounded-full border-2 border-navy"></div>
+                                <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 hover:border-green/50 transition-all duration-300">
+                                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                        <div>
+                                            <h3 class="text-xl font-semibold text-white mb-1">學習階段</h3>
+                                        </div>
+                                        <span class="text-slate text-sm mt-2 md:mt-0">2023 - 2024</span>
+                                    </div>
+                                    <p class="text-light-slate text-sm leading-relaxed">
+                                        透過線上課程 練習實作與 AI 協作工具（Cursor）深入學習前端開發，並持續探索 Web 開發的新技術與趨勢。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Stats Section -->
+                    <section class="scroll-mt-24 fade-in-up">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                            <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group">
+                                <div class="text-4xl font-bold text-green mb-2 group-hover:scale-110 transition-transform">0</div>
+                                <div class="text-light-slate text-sm">專案經驗</div>
+                            </div>
+                            <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group">
+                                <div class="text-4xl font-bold text-green mb-2 group-hover:scale-110 transition-transform">0</div>
+                                <div class="text-light-slate text-sm">技術棧</div>
+                            </div>
+                            <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group">
+                                <div class="text-4xl font-bold text-green mb-2 group-hover:scale-110 transition-transform">100%</div>
+                                <div class="text-light-slate text-sm">學習熱忱</div>
+                            </div>
+                            <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group">
+                                <div class="text-4xl font-bold text-green mb-2 group-hover:scale-110 transition-transform">∞</div>
+                                <div class="text-light-slate text-sm">成長潛力</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Contact Section -->
+                    <section id="contact" class="scroll-mt-24 fade-in-up">
+                        <div class="flex items-center mb-8">
+                            <h2 class="text-3xl font-bold text-white flex items-center">
+                                <span class="text-green text-xl mr-4 font-mono">04.</span>
+                                聯絡資訊
+                            </h2>
+                            <div class="flex-1 h-px bg-lightest-navy/30 ml-6"></div>
+                        </div>
+                        <div class="bg-light-navy/50 rounded-lg p-8 border border-lightest-navy/20 hover:border-green/50 transition-all duration-300">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-4">
+                                    <div class="flex items-start space-x-3">
+                                        <svg class="w-5 h-5 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        <div>
+                                            <h3 class="text-white font-semibold mb-1">地址 (Address)</h3>
+                                            <p class="text-light-slate text-sm">402 台中市南區復興路一段 85 號 -1</p>
+                                            <p class="text-slate text-xs mt-1">No. 85, Sec.1, Fuxing Rd., South District, Taichung City 402, Taiwan (R.O.C)</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <svg class="w-5 h-5 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                        </svg>
+                                        <div>
+                                            <h3 class="text-white font-semibold mb-1">電話 (Phone)</h3>
+                                            <p class="text-light-slate text-sm"><a href="tel:+886-4-2261-9577" class="text-green hover:text-green/80 transition-colors">+886-4-2261-9577</a> 分機 681</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-start space-x-3">
+                                        <svg class="w-5 h-5 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        <div>
+                                            <h3 class="text-white font-semibold mb-1">傳真 (Fax)</h3>
+                                            <p class="text-light-slate text-sm">+886-4-2262-3978</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <svg class="w-5 h-5 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                        </svg>
+                                        <div>
+                                            <h3 class="text-white font-semibold mb-1">官方網站 (Website)</h3>
+                                            <p class="text-light-slate text-sm"><a href="http://www.fdt.com.tw" target="_blank" class="text-green hover:text-green/80 transition-colors underline">www.fdt.com.tw</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-lightest-navy/20 mt-24 py-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <p class="text-light-slate text-sm mb-4 md:mb-0">由 Judy 設計與開發 © 2024</p>
+                <div class="flex items-center space-x-2 text-slate text-xs">
+                    <span>Built with</span>
+                    <span class="text-green">♥</span>
+                    <span>using HTML, CSS & JavaScript</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        // Theme toggle (placeholder - you can implement dark mode later)
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
