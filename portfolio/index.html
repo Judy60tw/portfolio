@@ -31,6 +31,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body {
             font-family: 'Inter', 'Calibre', 'San Francisco', 'SF Pro Text', system-ui, sans-serif;
+            overflow-x: hidden;
         }
         html {
             scroll-behavior: smooth;
@@ -53,36 +54,321 @@
             position: relative;
             z-index: 1;
         }
-        /* 动画效果 */
-        @keyframes fadeInUp {
-            from {
+
+        /* ===== 滾動觸發動畫 ===== */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scroll-reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .scroll-reveal-left.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .scroll-reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .scroll-reveal-right.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .scroll-reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .scroll-reveal-scale.revealed {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ===== 打字機效果 ===== */
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #64ffda;
+            white-space: nowrap;
+            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #64ffda }
+        }
+
+        /* ===== 標題漸層動畫 ===== */
+        .gradient-text {
+            background: linear-gradient(90deg, #64ffda, #a8b2d1, #64ffda);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease infinite;
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+
+        /* ===== 浮動粒子背景 ===== */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(100, 255, 218, 0.3);
+            border-radius: 50%;
+            animation: float-particle linear infinite;
+        }
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
                 opacity: 0;
-                transform: translateY(20px);
             }
-            to {
+            10% {
                 opacity: 1;
-                transform: translateY(0);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
             }
         }
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out;
+
+        /* ===== 滑鼠跟隨光暈 ===== */
+        .mouse-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
         }
-        /* 技能标签悬停效果 */
+
+        /* ===== 技能标签悬停效果 ===== */
         .skill-tag {
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .skill-tag:hover::before {
+            left: 100%;
         }
         .skill-tag:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(100, 255, 218, 0.2);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(100, 255, 218, 0.3);
+            border-color: #64ffda;
         }
+
+        /* ===== 技能標籤波浪動畫 ===== */
+        .skill-wave {
+            animation: skill-wave 0.6s ease forwards;
+            animation-play-state: paused;
+        }
+        .skill-wave.animate {
+            animation-play-state: running;
+        }
+        @keyframes skill-wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ===== 數字跳動動畫 ===== */
+        .stat-number {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        .stat-number.counting {
+            animation: number-pop 0.3s ease;
+        }
+        @keyframes number-pop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* ===== 卡片懸浮光效 ===== */
+        .card-glow {
+            position: relative;
+            overflow: hidden;
+        }
+        .card-glow::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(100, 255, 218, 0.1), transparent 30%);
+            animation: rotate-glow 4s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .card-glow:hover::after {
+            opacity: 1;
+        }
+        @keyframes rotate-glow {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== 導航活躍指示器 ===== */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link.active span:first-child {
+            width: 48px !important;
+            background-color: #64ffda !important;
+        }
+        .nav-link.active span:last-child {
+            color: #64ffda !important;
+        }
+
+        /* ===== 脈動圓點 ===== */
+        .pulse-dot {
+            position: relative;
+        }
+        .pulse-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: #64ffda;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+        }
+
+        /* ===== 頁面載入動畫 ===== */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a192f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-content {
+            text-align: center;
+        }
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(100, 255, 218, 0.2);
+            border-top-color: #64ffda;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== 圖片懸浮效果增強 ===== */
+        .image-hover-effect {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .image-hover-effect:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(100, 255, 218, 0.15);
+        }
+
+        /* ===== 連結底線動畫 ===== */
+        .link-underline {
+            position: relative;
+        }
+        .link-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #64ffda;
+            transition: width 0.3s ease;
+        }
+        .link-underline:hover::after {
+            width: 100%;
+        }
+
+        /* ===== 淡入動畫延遲 ===== */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+        .delay-500 { transition-delay: 0.5s; }
     </style>
 </head>
 <body class="bg-navy text-lightest-slate antialiased">
+    <!-- 頁面載入動畫 -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-spinner mx-auto mb-4"></div>
+            <p class="text-green text-sm">Loading...</p>
+        </div>
+    </div>
+
+    <!-- 浮動粒子背景 -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- 滑鼠跟隨光暈 -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-navy/80 backdrop-blur-sm border-b border-lightest-navy/20">
         <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center space-x-8">
-                <a href="#home" class="text-green font-semibold hover:text-green/80 transition-colors">生活</a>
+                <a href="#home" class="text-green font-bold text-2xl hover:text-green/80 transition-colors">生活</a>
             </div>
             <div class="flex items-center space-x-4">
                 <button id="theme-toggle" class="text-light-slate hover:text-green transition-colors">
@@ -118,28 +404,28 @@
                                 <span class="relative z-10">Judy</span>
                                 <span class="absolute -bottom-2 left-0 w-20 h-1 bg-green/30"></span>
                             </h1>
-                            <p class="text-light-slate leading-relaxed relative z-10">
+                            <p class="text-light-slate text-lg leading-relaxed relative z-10">
                                 致力於探索 Web 開發的新邊界，目前正以 Cursor 為起點，學習如何透過 AI 協作打造流暢的數位體驗。
                             </p>
                         </div>
 
                         <!-- Navigation -->
-                        <nav class="space-y-2">
-                            <a href="#about" class="flex items-center group text-light-slate hover:text-green transition-colors">
-                                <span class="w-8 h-px bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-12 transition-all"></span>
-                                <span>關於</span>
+                        <nav class="space-y-4" id="sideNav">
+                            <a href="#about" class="nav-link flex items-center group text-light-slate hover:text-green transition-colors">
+                                <span class="w-10 h-0.5 bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-14 transition-all"></span>
+                                <span class="text-2xl font-bold">關於</span>
                             </a>
-                            <a href="#skills" class="flex items-center group text-light-slate hover:text-green transition-colors">
-                                <span class="w-8 h-px bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-12 transition-all"></span>
-                                <span>所需</span>
+                            <a href="#skills" class="nav-link flex items-center group text-light-slate hover:text-green transition-colors">
+                                <span class="w-10 h-0.5 bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-14 transition-all"></span>
+                                <span class="text-2xl font-bold">所需</span>
                             </a>
-                            <a href="#experience" class="flex items-center group text-light-slate hover:text-green transition-colors">
-                                <span class="w-8 h-px bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-12 transition-all"></span>
-                                <span>經驗</span>
+                            <a href="#experience" class="nav-link flex items-center group text-light-slate hover:text-green transition-colors">
+                                <span class="w-10 h-0.5 bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-14 transition-all"></span>
+                                <span class="text-2xl font-bold">經驗</span>
                             </a>
-                            <a href="#contact" class="flex items-center group text-light-slate hover:text-green transition-colors">
-                                <span class="w-8 h-px bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-12 transition-all"></span>
-                                <span>聯絡</span>
+                            <a href="#contact" class="nav-link flex items-center group text-light-slate hover:text-green transition-colors">
+                                <span class="w-10 h-0.5 bg-lightest-navy mr-4 group-hover:bg-green group-hover:w-14 transition-all"></span>
+                                <span class="text-2xl font-bold">聯絡</span>
                             </a>
                         </nav>
 
@@ -172,16 +458,16 @@
                 <!-- Right Content Area -->
                 <div class="lg:col-span-9 space-y-24">
                     <!-- About Section -->
-                    <section id="about" class="scroll-mt-24 fade-in-up">
+                    <section id="about" class="scroll-mt-24 scroll-reveal">
                         <div class="flex items-center mb-8">
-                            <h2 class="text-3xl font-bold text-white flex items-center">
-                                <span class="text-green text-xl mr-4 font-mono">01.</span>
+                            <h2 class="text-4xl font-bold text-white flex items-center">
+                                <span class="text-green text-2xl mr-4 font-mono">01.</span>
                                 關於我
                             </h2>
                             <div class="flex-1 h-px bg-lightest-navy/30 ml-6"></div>
                         </div>
                         <div class="space-y-6">
-                            <div class="space-y-4 text-light-slate leading-relaxed">
+                            <div class="space-y-5 text-light-slate text-lg leading-relaxed">
                                 <p>
                                     我是一名致力於探索 Web 開發新邊界的學習者。目前正以 Cursor 為起點，深入研究如何透過 AI 協作來打造流暢且直覺的數位體驗。我享受在程式碼與人工智慧之間尋找平衡，並將這些新技術轉化為實際的作品。
                                 </p>
@@ -191,13 +477,13 @@
                                 <p>
                                     在螢幕之外，我熱衷於探索大自然與生活的風味。我的興趣包括：
                                 </p>
-                                <ul class="list-none space-y-2 ml-4">
+                                <ul class="list-none space-y-3 ml-4">
                                     <li class="flex items-start">
-                                        <span class="text-green mr-3">•</span>
+                                        <span class="text-green mr-3 text-xl">•</span>
                                         <span><strong class="text-white">戶外探索：</strong>熱愛健走與登山，享受登上山頂時那份開闊的視野。</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <span class="text-green mr-3">•</span>
+                                        <span class="text-green mr-3 text-xl">•</span>
                                         <span><strong class="text-white">咖啡生活：</strong>深度著迷於咖啡文化，喜歡品嚐各地的豆子，並不斷嘗試手沖咖啡的各種參數，追求那杯最完美的風味。</span>
                                     </li>
                                 </ul>
@@ -205,16 +491,16 @@
                             
                             <!-- Hiking Image -->
                             <div class="mt-8">
-                                <div class="relative rounded-lg overflow-hidden border border-lightest-navy/20 hover:border-green/50 transition-all duration-300 group">
+                                <div class="relative rounded-lg overflow-hidden border border-lightest-navy/20 hover:border-green/50 transition-all duration-300 group image-hover-effect">
                                     <img 
                                         src="images/hiking.jpg" 
                                         alt="登山健行 - 在山徑上探索大自然" 
-                                        class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                                        class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
                                         loading="lazy"
                                     >
                                     <div class="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>
-                                <p class="text-sm text-slate mt-3 text-center italic">
+                                <p class="text-base text-slate mt-3 text-center italic">
                                     在山徑上探索，尋找數位世界之外的靈感
                                 </p>
                             </div>
@@ -222,100 +508,100 @@
                     </section>
 
                     <!-- Skills Section -->
-                    <section id="skills" class="scroll-mt-24 fade-in-up">
+                    <section id="skills" class="scroll-mt-24 scroll-reveal">
                         <div class="flex items-center mb-8">
-                            <h2 class="text-3xl font-bold text-white flex items-center">
-                                <span class="text-green text-xl mr-4 font-mono">02.</span>
+                            <h2 class="text-4xl font-bold text-white flex items-center">
+                                <span class="text-green text-2xl mr-4 font-mono">02.</span>
                                 所需
                             </h2>
                             <div class="flex-1 h-px bg-lightest-navy/30 ml-6"></div>
                         </div>
-                        <div class="space-y-6">
+                        <div class="space-y-8">
                             <div>
-                                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                                    <svg class="w-5 h-5 text-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <h3 class="text-2xl font-semibold text-white mb-5 flex items-center">
+                                    <svg class="w-6 h-6 text-green mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
                                     </svg>
                                     前端技術
                                 </h3>
-                                <div class="flex flex-wrap gap-3">
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">HTML5</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">CSS3</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">JavaScript</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">TypeScript</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">React</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Tailwind CSS</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Responsive Design</span>
+                                <div class="flex flex-wrap gap-4">
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">HTML5</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">CSS3</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">JavaScript</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">TypeScript</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">React</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">Tailwind CSS</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">Responsive Design</span>
                                 </div>
                             </div>
                             <div>
-                                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                                    <svg class="w-5 h-5 text-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <h3 class="text-2xl font-semibold text-white mb-5 flex items-center">
+                                    <svg class="w-6 h-6 text-green mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                                     </svg>
                                     開發工具
                                 </h3>
-                                <div class="flex flex-wrap gap-3">
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Git</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Cursor</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">VS Code</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">AI 協作</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Webpack</span>
+                                <div class="flex flex-wrap gap-4">
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">Git</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">Cursor</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">VS Code</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">AI 協作</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">Webpack</span>
                                 </div>
                             </div>
                             <div>
-                                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                                    <svg class="w-5 h-5 text-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <h3 class="text-2xl font-semibold text-white mb-5 flex items-center">
+                                    <svg class="w-6 h-6 text-green mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
                                     </svg>
                                     設計與協作
                                 </h3>
-                                <div class="flex flex-wrap gap-3">
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">UI/UX 設計</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">Figma</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">團隊協作</span>
-                                    <span class="skill-tag px-4 py-2 bg-light-navy/50 text-green rounded-full border border-green/30 text-sm font-medium">問題解決</span>
+                                <div class="flex flex-wrap gap-4">
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">UI/UX 設計</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">Figma</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">團隊協作</span>
+                                    <span class="skill-tag px-5 py-2.5 bg-light-navy/50 text-green rounded-full border border-green/30 text-base font-medium">問題解決</span>
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     <!-- Experience Section -->
-                    <section id="experience" class="scroll-mt-24 fade-in-up">
+                    <section id="experience" class="scroll-mt-24 scroll-reveal">
                         <div class="flex items-center mb-8">
-                            <h2 class="text-3xl font-bold text-white flex items-center">
-                                <span class="text-green text-xl mr-4 font-mono">03.</span>
+                            <h2 class="text-4xl font-bold text-white flex items-center">
+                                <span class="text-green text-2xl mr-4 font-mono">03.</span>
                                 工作經驗
                             </h2>
                             <div class="flex-1 h-px bg-lightest-navy/30 ml-6"></div>
                         </div>
                         <div class="space-y-8">
-                            <div class="relative pl-8 border-l-2 border-lightest-navy">
-                                <div class="absolute -left-2.5 w-5 h-5 bg-green rounded-full border-2 border-navy"></div>
-                                <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 hover:border-green/50 transition-all duration-300">
-                                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                            <div class="relative pl-10 border-l-2 border-lightest-navy scroll-reveal-left delay-100">
+                                <div class="absolute -left-3 w-6 h-6 bg-green rounded-full border-2 border-navy pulse-dot"></div>
+                                <div class="bg-light-navy/30 rounded-lg p-8 border border-lightest-navy/20 hover:border-green/50 transition-all duration-300 card-glow">
+                                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                                         <div>
-                                            <h3 class="text-xl font-semibold text-white mb-1">RD助理</h3>
-                                            <p class="text-green text-sm font-medium">Flat Display Technology Corporation</p>
-                                            <p class="text-light-slate text-sm">豐裕科技股份有限公司</p>
+                                            <h3 class="text-2xl font-semibold text-white mb-2">RD助理</h3>
+                                            <p class="text-green text-base font-medium">Flat Display Technology Corporation</p>
+                                            <p class="text-light-slate text-base">豐裕科技股份有限公司</p>
                                         </div>
-                                        <span class="text-slate text-sm mt-2 md:mt-0">2024 - 至今</span>
+                                        <span class="text-slate text-base mt-2 md:mt-0">2024 - 至今</span>
                                     </div>
-                                    <p class="text-light-slate text-sm leading-relaxed">
+                                    <p class="text-light-slate text-lg leading-relaxed">
                                         學習 Web 開發技術
                                     </p>
                                 </div>
                             </div>
-                            <div class="relative pl-8 border-l-2 border-lightest-navy">
-                                <div class="absolute -left-2.5 w-5 h-5 bg-green rounded-full border-2 border-navy"></div>
-                                <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 hover:border-green/50 transition-all duration-300">
-                                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                            <div class="relative pl-10 border-l-2 border-lightest-navy scroll-reveal-left delay-200">
+                                <div class="absolute -left-3 w-6 h-6 bg-green rounded-full border-2 border-navy"></div>
+                                <div class="bg-light-navy/30 rounded-lg p-8 border border-lightest-navy/20 hover:border-green/50 transition-all duration-300 card-glow">
+                                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                                         <div>
-                                            <h3 class="text-xl font-semibold text-white mb-1">學習階段</h3>
+                                            <h3 class="text-2xl font-semibold text-white mb-2">學習階段</h3>
                                         </div>
-                                        <span class="text-slate text-sm mt-2 md:mt-0">2023 - 2024</span>
+                                        <span class="text-slate text-base mt-2 md:mt-0">2023 - 2024</span>
                                     </div>
-                                    <p class="text-light-slate text-sm leading-relaxed">
+                                    <p class="text-light-slate text-lg leading-relaxed">
                                         透過線上課程 練習實作與 AI 協作工具（Cursor）深入學習前端開發，並持續探索 Web 開發的新技術與趨勢。
                                     </p>
                                 </div>
@@ -324,77 +610,77 @@
                     </section>
 
                     <!-- Stats Section -->
-                    <section class="scroll-mt-24 fade-in-up">
+                    <section id="stats" class="scroll-mt-24 scroll-reveal">
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                            <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group">
-                                <div class="text-4xl font-bold text-green mb-2 group-hover:scale-110 transition-transform">0</div>
-                                <div class="text-light-slate text-sm">專案經驗</div>
+                            <div class="bg-light-navy/30 rounded-lg p-8 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group card-glow scroll-reveal-scale delay-100">
+                                <div class="text-5xl font-bold text-green mb-3 group-hover:scale-110 transition-transform stat-number" data-target="3">0</div>
+                                <div class="text-light-slate text-base">專案經驗</div>
                             </div>
-                            <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group">
-                                <div class="text-4xl font-bold text-green mb-2 group-hover:scale-110 transition-transform">0</div>
-                                <div class="text-light-slate text-sm">技術棧</div>
+                            <div class="bg-light-navy/30 rounded-lg p-8 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group card-glow scroll-reveal-scale delay-200">
+                                <div class="text-5xl font-bold text-green mb-3 group-hover:scale-110 transition-transform stat-number" data-target="7">0</div>
+                                <div class="text-light-slate text-base">技術棧</div>
                             </div>
-                            <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group">
-                                <div class="text-4xl font-bold text-green mb-2 group-hover:scale-110 transition-transform">100%</div>
-                                <div class="text-light-slate text-sm">學習熱忱</div>
+                            <div class="bg-light-navy/30 rounded-lg p-8 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group card-glow scroll-reveal-scale delay-300">
+                                <div class="text-5xl font-bold text-green mb-3 group-hover:scale-110 transition-transform stat-number" data-target="100" data-suffix="%">0</div>
+                                <div class="text-light-slate text-base">學習熱忱</div>
                             </div>
-                            <div class="bg-light-navy/30 rounded-lg p-6 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group">
-                                <div class="text-4xl font-bold text-green mb-2 group-hover:scale-110 transition-transform">∞</div>
-                                <div class="text-light-slate text-sm">成長潛力</div>
+                            <div class="bg-light-navy/30 rounded-lg p-8 border border-lightest-navy/20 text-center hover:border-green/50 transition-all duration-300 group card-glow scroll-reveal-scale delay-400">
+                                <div class="text-5xl font-bold text-green mb-3 group-hover:scale-110 transition-transform">∞</div>
+                                <div class="text-light-slate text-base">成長潛力</div>
                             </div>
                         </div>
                     </section>
 
                     <!-- Contact Section -->
-                    <section id="contact" class="scroll-mt-24 fade-in-up">
+                    <section id="contact" class="scroll-mt-24 scroll-reveal">
                         <div class="flex items-center mb-8">
-                            <h2 class="text-3xl font-bold text-white flex items-center">
-                                <span class="text-green text-xl mr-4 font-mono">04.</span>
+                            <h2 class="text-4xl font-bold text-white flex items-center">
+                                <span class="text-green text-2xl mr-4 font-mono">04.</span>
                                 聯絡資訊
                             </h2>
                             <div class="flex-1 h-px bg-lightest-navy/30 ml-6"></div>
                         </div>
-                        <div class="bg-light-navy/50 rounded-lg p-8 border border-lightest-navy/20 hover:border-green/50 transition-all duration-300">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-4">
-                                    <div class="flex items-start space-x-3">
-                                        <svg class="w-5 h-5 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="bg-light-navy/50 rounded-lg p-10 border border-lightest-navy/20 hover:border-green/50 transition-all duration-300">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <div class="flex items-start space-x-4">
+                                        <svg class="w-6 h-6 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         </svg>
                                         <div>
-                                            <h3 class="text-white font-semibold mb-1">地址 (Address)</h3>
-                                            <p class="text-light-slate text-sm">402 台中市南區復興路一段 85 號 -1</p>
-                                            <p class="text-slate text-xs mt-1">No. 85, Sec.1, Fuxing Rd., South District, Taichung City 402, Taiwan (R.O.C)</p>
+                                            <h3 class="text-white font-semibold text-lg mb-2">地址 (Address)</h3>
+                                            <p class="text-light-slate text-base">402 台中市南區復興路一段 85 號 -1</p>
+                                            <p class="text-slate text-sm mt-1">No. 85, Sec.1, Fuxing Rd., South District, Taichung City 402, Taiwan (R.O.C)</p>
                                         </div>
                                     </div>
-                                    <div class="flex items-start space-x-3">
-                                        <svg class="w-5 h-5 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="flex items-start space-x-4">
+                                        <svg class="w-6 h-6 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                                         </svg>
                                         <div>
-                                            <h3 class="text-white font-semibold mb-1">電話 (Phone)</h3>
-                                            <p class="text-light-slate text-sm"><a href="tel:+886-4-2261-9577" class="text-green hover:text-green/80 transition-colors">+886-4-2261-9577</a> 分機 681</p>
+                                            <h3 class="text-white font-semibold text-lg mb-2">電話 (Phone)</h3>
+                                            <p class="text-light-slate text-base"><a href="tel:+886-4-2261-9577" class="text-green hover:text-green/80 transition-colors">+886-4-2261-9577</a> 分機 681</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="space-y-4">
-                                    <div class="flex items-start space-x-3">
-                                        <svg class="w-5 h-5 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="space-y-6">
+                                    <div class="flex items-start space-x-4">
+                                        <svg class="w-6 h-6 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                         </svg>
                                         <div>
-                                            <h3 class="text-white font-semibold mb-1">傳真 (Fax)</h3>
-                                            <p class="text-light-slate text-sm">+886-4-2262-3978</p>
+                                            <h3 class="text-white font-semibold text-lg mb-2">傳真 (Fax)</h3>
+                                            <p class="text-light-slate text-base">+886-4-2262-3978</p>
                                         </div>
                                     </div>
-                                    <div class="flex items-start space-x-3">
-                                        <svg class="w-5 h-5 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="flex items-start space-x-4">
+                                        <svg class="w-6 h-6 text-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                                         </svg>
                                         <div>
-                                            <h3 class="text-white font-semibold mb-1">官方網站 (Website)</h3>
-                                            <p class="text-light-slate text-sm"><a href="http://www.fdt.com.tw" target="_blank" class="text-green hover:text-green/80 transition-colors underline">www.fdt.com.tw</a></p>
+                                            <h3 class="text-white font-semibold text-lg mb-2">官方網站 (Website)</h3>
+                                            <p class="text-light-slate text-base"><a href="http://www.fdt.com.tw" target="_blank" class="text-green hover:text-green/80 transition-colors underline">www.fdt.com.tw</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -407,11 +693,11 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-lightest-navy/20 mt-24 py-8">
+    <footer class="border-t border-lightest-navy/20 mt-24 py-10">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center justify-between">
-                <p class="text-light-slate text-sm mb-4 md:mb-0">由 Judy 設計與開發 © 2024</p>
-                <div class="flex items-center space-x-2 text-slate text-xs">
+                <p class="text-light-slate text-base mb-4 md:mb-0">由 Judy 設計與開發 © 2024</p>
+                <div class="flex items-center space-x-2 text-slate text-sm">
                     <span>Built with</span>
                     <span class="text-green">♥</span>
                     <span>using HTML, CSS & JavaScript</span>
@@ -420,14 +706,175 @@
         </div>
     </footer>
 
-    <!-- Smooth Scroll Script -->
+    <!-- Dynamic Effects Script -->
     <script>
-        // Theme toggle (placeholder - you can implement dark mode later)
+        // ===== 頁面載入動畫 =====
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('pageLoader').classList.add('hidden');
+            }, 800);
+        });
+
+        // ===== 浮動粒子效果 =====
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = (Math.random() * 4 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // ===== 滑鼠跟隨光暈 =====
+        const mouseGlow = document.getElementById('mouseGlow');
+        let mouseX = 0, mouseY = 0;
+        let glowX = 0, glowY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateGlow() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            mouseGlow.style.left = glowX + 'px';
+            mouseGlow.style.top = glowY + 'px';
+            requestAnimationFrame(animateGlow);
+        }
+        animateGlow();
+
+        // ===== 滾動觸發動畫 =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    
+                    // 觸發技能標籤波浪動畫
+                    if (entry.target.id === 'skills') {
+                        animateSkillTags();
+                    }
+                    
+                    // 觸發數字跳動動畫
+                    if (entry.target.id === 'stats') {
+                        animateNumbers();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // 觀察所有需要動畫的元素
+        document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale').forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+        // ===== 技能標籤波浪動畫 =====
+        function animateSkillTags() {
+            const tags = document.querySelectorAll('.skill-tag');
+            tags.forEach((tag, index) => {
+                setTimeout(() => {
+                    tag.classList.add('skill-wave', 'animate');
+                    setTimeout(() => {
+                        tag.classList.remove('animate');
+                    }, 600);
+                }, index * 80);
+            });
+        }
+
+        // ===== 數字跳動動畫 =====
+        let numbersAnimated = false;
+        function animateNumbers() {
+            if (numbersAnimated) return;
+            numbersAnimated = true;
+
+            const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+            statNumbers.forEach(el => {
+                const target = parseInt(el.dataset.target);
+                const suffix = el.dataset.suffix || '';
+                const duration = 1500;
+                const start = 0;
+                const startTime = performance.now();
+
+                function updateNumber(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(start + (target - start) * easeOut);
+                    
+                    el.textContent = current + suffix;
+                    el.classList.add('counting');
+                    setTimeout(() => el.classList.remove('counting'), 100);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateNumber);
+                    }
+                }
+                requestAnimationFrame(updateNumber);
+            });
+        }
+
+        // ===== 導航滾動高亮 =====
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function updateActiveNav() {
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+        updateActiveNav();
+
+        // ===== Header 滾動效果 =====
+        const header = document.querySelector('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            
+            if (currentScroll > 100) {
+                header.style.boxShadow = '0 10px 30px -10px rgba(0, 0, 0, 0.3)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // ===== Theme toggle =====
         document.getElementById('theme-toggle').addEventListener('click', function() {
             document.documentElement.classList.toggle('dark');
         });
 
-        // Smooth scroll for anchor links
+        // ===== Smooth scroll for anchor links =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -440,6 +887,41 @@
                 }
             });
         });
+
+        // ===== 技能標籤滑鼠互動 =====
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-4px) scale(1.05)';
+            });
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // ===== 卡片 3D 傾斜效果 =====
+        document.querySelectorAll('.card-glow').forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+
+                this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+
+        // ===== 打字機效果初始化（給名字區域） =====
+        const nameElement = document.querySelector('h1 span');
+        if (nameElement) {
+            nameElement.classList.add('gradient-text');
+        }
     </script>
 </body>
 </html>
