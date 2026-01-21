@@ -1,0 +1,77 @@
+
+
+
+
+安裝yarn
+yarn create vite
+
+
+
+
+
+--------
+Terminal
+
+1.回上一層-cd..
+  cd todo-js(cd t直接按Tab鍵)
+
+2.程式完成 要執行git commit
+
+cd todo-js(回到todo-js層)
+
+git init(首次將該專案push GitHub)
+
+git add .(首次將該專案push GitHub)
+
+git commit -m "完成 Todo App 實作"
+
+git branch -M main(若名稱非Main 須留意修改)
+
+git remote add origin https://github.com/Judy60tw/todo-js.git
+
+git push -u origin main(若名稱非Main 須留意修改)
+
+------
+商新宗	(2026-01-19 10:06:30):
+http://cursor.com/zh-Hant/agents 線上板的, 我也沒用過, 你再試試看
+
+-------
+上GitHub SSH操作
+
+商新宗	(2026-01-16 14:54:21):
+你有執行或看到 AI 執行 ssh-keygen 這個指令嗎?
+
+商新宗	(2026-01-16 14:55:26):
+https://www.notion.so/Vibe-Coding-2dca0eefcc73804bb3efd7b9d5e528bf?source=copy_link#2e8a0eefcc738088ab23d2439d9a1503
+-----
+Cursor環境安裝
+Windows Local
+ Git(x64 Setup)
+ Node.js(.msl安裝程式)
+  Yarn
+   npm install -g yarn
+ Cursor(User版) 
+
+------------
+範例三：記憶翻牌遊戲 (Memory Match Game)
+這個遊戲非常適合練習 JavaScript 的陣列處理 (Array Shuffling) 以及 非同步操作 (setTimeout)。
+
+遊戲玩法：畫面上有多張蓋住的卡牌，玩家每次翻開兩張，若圖案相同則配對成功並保持翻開；若不同則在短暫延遲後翻回去。
+
+技術要點：
+
+使用 Array.sort(() => Math.random() - 0.5) 進行洗牌。
+
+利用 dataset 屬性儲存卡牌類型。
+
+練習處理 CSS 動畫（翻轉效果）與 JS 的邏輯同步。
+
+在 Cursor 中建議輸入的 Prompt：
+
+「請用 HTML, CSS, Vanilla JS 製作一個 4x4 的記憶翻牌遊戲。背景使用米色，卡牌翻開時有平滑動畫。請確保點擊太快時不會產生錯誤，並在配對完成時顯示恭喜訊息。」
+-----
+Q:Cursor開機後系統自動移除(Cursor.exe路徑不存在)
+
+A:臨時對策 到以下路徑將"Cursor.7z"解壓縮(Cursor.exe)
+
+C:\Users\Judy\AppData\Local\Programs\cursor

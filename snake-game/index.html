@@ -264,7 +264,7 @@
         let gameLoop;
 
         // 基本速度（毫秒）
-        let baseSpeed = 150;
+        let baseSpeed = 300;
         let currentSpeed = baseSpeed;
 
         // 初始化最高分顯示
@@ -376,7 +376,7 @@
                 }
 
                 // 增加速度（分數越高，速度越快）
-                currentSpeed = Math.max(80, baseSpeed - Math.floor(score / 50) * 5);
+                currentSpeed = Math.max(180, baseSpeed - Math.floor(score / 50) * 5);
 
                 // 重新設定遊戲循環以更新速度
                 if (gameRunning) {

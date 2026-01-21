@@ -1,0 +1,127 @@
+
+
+
+
+目前正在學習NTU Web Programming.可以規劃一個區域 存放相關文件資料或整理的重點? 你的建議看法?
+----
+NTU Notebook逐字稿
+Judy重整稿
+
+======
+在PS C:\Users\Judy\OneDrive\Desktop\NTU Web Programming>
+以下command 可以使cursor順利執行
+
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+=======
+1.個人網頁
+https://brittanychiang.com/
+
+這是我喜歡的網頁風格截圖。請參考它的佈局（Layout）和配色方案，幫我寫一個 HTML + Tailwind CSS 的基礎框架。功能要包含：關於我、作品展示區（Grid 佈局）、以及聯絡資訊。
+
+2.我為網路打造易於存取、像素級完美的數位體驗。=>改為 "致力於探索 Web 開發的新邊界，目前正以 Cursor 為起點，學習如何透過 AI 協作打造流暢的數位體驗。" 
+
+3."關於我
+
+我是一名對易於存取和像素級完美使用者介面充滿熱情的開發者，結合設計與工程來創造數位體驗。
+
+改為如下
+
+我是一名致力於探索 Web 開發新邊界的學習者。目前正以 Cursor 為起點，深入研究如何透過 AI 協作來打造流暢且直覺的數位體驗。我享受在程式碼與人工智慧之間尋找平衡，並將這些新技術轉化為實際的作品。
+
+目前我專注於網頁前端的基礎建設，練習如何將設計概念精準地實現在瀏覽器中。對我而言，學習開發不只是為了寫出代碼，更是為了理解數位世界運行的邏輯。
+
+在螢幕之外，我熱衷於探索大自然與生活的風味。我的興趣包括：
+
+戶外探索：熱愛健走與登山，享受登上山頂時那份開闊的視野。
+
+咖啡生活：深度著迷於咖啡文化，喜歡品嚐各地的豆子，並不斷嘗試手沖咖啡的各種參數，追求那杯最完美的風味。
+
+-------
+HTML/CSS/Javascript
+
+靜態網頁
+動態網頁
+
+
+HTTP通訊協定
+
+GitHub-雲端共同儲存空間
+git-區域(local)
+    git help
+    git status　　
+
+--------
+C:\Users\Judy\OneDrive\Desktop\NTU Web Programming>git --help
+usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]
+           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]
+           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   restore    Restore working tree files
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   diff       Show changes between commits, commit and working tree, etc
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   backfill   Download missing objects in a partial clone
+   branch     List, create, or delete branches
+   commit     Record changes to the repository
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   reset      Reset current HEAD to the specified state
+   switch     Switch branches
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+See 'git help git' for an overview of the system.
+
+C:\Users\Judy\OneDrive\Desktop\NTU Web Programming>
+------
+
+26/1/12申請-刷個人信用卡 USD20
+/一個月 使用期限-2/12
+Prompt
+===
+如圖，幫我用 HTML, CSS, JavaScript 做一個純前端的 app，目錄名稱就叫 "todo-js"，不要套用像是 React or Vue 等框架，單純用 JavaScript 就好了。
+
+用 yarn 管理套件與專案
+
+"new todo" 為文字框，可以輸入新的 todo 的名稱，而下方的 "description" 文字框可以輸入這個 todo 的 description
+
+最下面的 todo1, todo2 為目前的 todo items，上面的 new todo 加入後會加在加入後會加在 todo items 的最後面，如果超過螢幕的 viewable，會自動出現 scroll，但上方的 title, new todo, 以及 description 都是固定在螢幕上，不會隨著 scroll
+
+app 一開始 default 就是這兩個 todo items
+
+todo item 左邊的小方框可以用來複選 todo items，目前就只是選取而已，並沒有任何功能或是其他的操作
+
+todo item 右邊紅色的 delete 按鈕按下去會把該 todo item 刪掉（不用 pop up 詢問，直接刪掉），其下方的 todo items 會移上來
+
+click on todo item 會在其下方展開他的 description, description 的高度隨著 description 內容而定。其他方的 todo items 會隨著往下移
+
+重新開啟 app 會回到同樣的畫面 (i.e. no storage or DB)
+
+請加上 git 的管理
